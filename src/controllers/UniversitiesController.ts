@@ -22,6 +22,18 @@ class UniversitiesController{
         
         return response.json(result)
     }
+
+    async deleteUniversity(request: Request, response: Response){
+        try{
+            const { id } = request.params
+    
+            const result = await service.deleteUniversity(id)
+    
+            return response.json(result)
+        }catch(err){
+            return response.send({error: err.message})
+        }
+    }
 }
 
 export { UniversitiesController}
