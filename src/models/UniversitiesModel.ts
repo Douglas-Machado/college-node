@@ -2,13 +2,13 @@ import { CountryModel } from "./collections/country"
 
 class UniversitiesModel{
   async listAll(countryParam = null) {
-    const country = this.parseCountryValue(countryParam)
     try{
-      if(!country){
+      if(!countryParam){
         const universityList = await CountryModel.find({}, '_id name country stateProvince')
         
         return(universityList)
       }
+      const country = this.parseCountryValue(countryParam)
       const universityList = await CountryModel.find({country: country})
 
       return universityList
@@ -16,10 +16,20 @@ class UniversitiesModel{
     }
   }
 
-  async findUniversity(id){
+  async findUniversity(id: string){
     const result = await CountryModel.findById(id)
 
     return result
+  }
+
+  async deleteUniversity(id: string){
+    try{
+      await CountryModel.deleteOne({_id: id})
+
+      return({message: "University deleted"}) 
+    }catch(err){
+      throw new Error("fail while deleting from db")
+    }
   }
 
   parseCountryValue(countryParam: string){
