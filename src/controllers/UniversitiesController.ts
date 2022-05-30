@@ -1,13 +1,26 @@
 import { Request, Response } from "express";
 import { UniversitiesModel } from "../models/UniversitiesModel"
 
+const service = new UniversitiesModel();
+
 class UniversitiesController{
-    async listCountries(req: Request, res: Response){
-        const service = new UniversitiesModel();
+    async listCountries(request: Request, response: Response){
+        if(request.query.country) {
+            const country: string = request.query.country as string
+            const result = await service.listAll(country);
 
-        const result = await service.execute();
+            return response.json(result)
+        }
+        const result = await service.listAll();
 
-        return res.json(result)
+        return response.json(result)
+    }
+
+    async getUniversity(request: Request, response: Response){
+        const { id } = request.params
+        const result = await service.findUniversity(id)
+        
+        return response.json(result)
     }
 }
 
