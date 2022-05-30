@@ -4,6 +4,6 @@ import { UniversitiesController } from "./controllers/UniversitiesController";
 
 const routes = Router()
 
-routes.get("/universities", new UniversitiesController().handle)
+routes.get("/universities", new UniversitiesController().listCountries)
 
 export { routes }

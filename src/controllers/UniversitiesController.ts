@@ -1,19 +1,14 @@
 import { Request, Response } from "express";
-import { UniversitiesService } from "../services/UniversitiesServer"
+import { UniversitiesModel } from "../models/UniversitiesModel"
 
-class UniversitiesController {
-  async handle(request: Request, response: Response) {
-    const service = new UniversitiesService()
+class UniversitiesController{
+    async listCountries(req: Request, res: Response){
+        const service = new UniversitiesModel();
 
-    try{
-      const result = await service.execute()
-      console.log(result)
+        const result = await service.execute();
 
-      return response.json(result)
-    }catch(e){
-      console.log(e)
+        return res.json(result)
     }
-  }
 }
 
-export { UniversitiesController }
+export { UniversitiesController}

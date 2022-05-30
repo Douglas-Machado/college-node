@@ -1,3 +1,4 @@
+import { CountryModel } from "../models/collections/country"
 import axios from "axios"
 
 const countriesUrl = [
@@ -11,17 +12,27 @@ const countriesUrl = [
   "http://universities.hipolabs.com/search?country=uruguay"
 ]
 
-class UniversitiesService {
-  async execute() {
+class ApiRequest{
+  async execute(){
     try{
-      countriesUrl.map(async (urlParam: any) => {
+      const result = countriesUrl.map(async (urlParam: any) => {
         const response = await axios.get(urlParam)
-        console.log({response: response.data} )
+        
+        const parsedResponse = Object.entries(response.data)
+        parsedResponse.map((country: any) => {
+          CountryModel.create(
+            {
+              ...country[1],
+              stateProvince: country[1]['state-province'],
+            }
+          )
+        })
       })
+      await Promise.all(result)
     }catch(e){
       console.log(e)
     }
   }
 }
 
-export { UniversitiesService }
+export { ApiRequest }
