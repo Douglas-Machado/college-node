@@ -22,7 +22,6 @@ class UniversitiesController{
             }
             const result = await service.listAll();
             const resultResponse = result.slice(index, limit)
-            console.log(resultResponse)
     
             return response.json(resultResponse)
         }catch(err){
@@ -33,7 +32,7 @@ class UniversitiesController{
     async getUniversity(request: Request, response: Response){
         try{
             const { id } = request.params
-            const result = await service.findUniversity(id)
+            const result = await service.find(id)
             
             return response.json(result)
         }catch(err){
@@ -42,11 +41,23 @@ class UniversitiesController{
 
     }
 
+    async updateUniversity(request: Request, response: Response){
+        try{
+            const { id } = request.params
+            const { web_pages, name, domains } = request.body
+            const result = await service.update({id, web_pages, name, domains})
+
+            return response.json(result)
+        }catch(err){
+            return response.send({error: err.message})
+        }
+    }
+
     async deleteUniversity(request: Request, response: Response){
         try{
             const { id } = request.params
     
-            const result = await service.deleteUniversity(id)
+            const result = await service.delete(id)
     
             return response.json(result)
         }catch(err){

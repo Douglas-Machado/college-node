@@ -1,15 +1,22 @@
-import { CountryModel } from "./collections/country"
+import { UniversityModel } from "./collections/country"
+
+interface IUniversityParams {
+  id: string,
+  web_pages: Array<string>;
+  name: string,
+  domains: Array<String>;
+}
 
 class UniversitiesModel{
   async listAll(countryParam = null) {
     try{
       if(!countryParam){
-        const universityList = await CountryModel.find({}, '_id name country stateProvince')
+        const universityList = await UniversityModel.find({}, '_id name country stateProvince')
         
         return(universityList)
       }
       const country = this.parseCountryValue(countryParam)
-      const universityList = await CountryModel.find({country: country}, '_id name country stateProvince')
+      const universityList = await UniversityModel.find({country: country}, '_id name country stateProvince')
 
       return universityList
     }catch(err){
@@ -17,9 +24,9 @@ class UniversitiesModel{
     }
   }
 
-  async findUniversity(id: string){
+  async find(id: string){
     try{
-      const result = await CountryModel.findById(id)
+      const result = await UniversityModel.findById(id)
   
       return result
     }catch{
@@ -27,9 +34,28 @@ class UniversitiesModel{
     }
   }
 
-  async deleteUniversity(id: string){
+  async update({id, web_pages, name, domains}: IUniversityParams){
     try{
-      await CountryModel.deleteOne({_id: id})
+      await UniversityModel.updateOne(
+        {id: id},
+        {
+          webPages: web_pages,
+          name: name,
+          domains: domains
+        },
+        {new: true}
+      )
+      const result = await UniversityModel.findById(id)
+      return result
+      
+    }catch(err){
+      throw new Error("Something went wrong")
+    }
+  }
+
+  async delete(id: string){
+    try{
+      await UniversityModel.deleteOne({_id: id})
 
       return({message: "University deleted"}) 
     }catch{
