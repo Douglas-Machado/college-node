@@ -17,8 +17,8 @@ const UniversitySchema = new mongoose.Schema({
 })
 
 async function validations(name: string){
-  const nameCount = await mongoose.models.countries.countDocuments({ name })
+  const nameCount = await mongoose.models.universities.countDocuments({ name })
   return !nameCount
 }
 
-export const UniversityModel = mongoose.model('countries', UniversitySchema)
+export const UniversityModel = mongoose.model('universities', UniversitySchema)
