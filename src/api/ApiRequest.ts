@@ -23,7 +23,9 @@ class ApiRequest{
           CountryModel.create(
             {
               ...country[1],
+              alphaTwoCode: country[1].alpha_two_code,
               stateProvince: country[1]['state-province'],
+              webPages: country[1].web_pages
             }
           )
         })

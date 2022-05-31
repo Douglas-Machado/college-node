@@ -9,7 +9,7 @@ class UniversitiesModel{
         return(universityList)
       }
       const country = this.parseCountryValue(countryParam)
-      const universityList = await CountryModel.find({country: country})
+      const universityList = await CountryModel.find({country: country}, '_id name country stateProvince')
 
       return universityList
     }catch(err){
