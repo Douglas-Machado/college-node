@@ -1,7 +1,5 @@
 import { UniversitiesModel } from "./UniversitiesModel"
 
-const mockId = "62969578609ae1a4f69911c9"
-
 const universitiesModel = new UniversitiesModel
 
 describe('Universities', () => {

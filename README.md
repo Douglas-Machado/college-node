@@ -1,4 +1,4 @@
-# Univeristy CRUD
+# University CRUD
 
   CRUD node with mongodb to consume the [universities API](http://universities.hipolabs.com/search)
   deployment in: [Railway](https://college-node-production.up.railway.app/universities)
@@ -94,7 +94,5 @@
 * [Axios](https://axios-http.com)
 
 * [API](http://universities.hipolabs.com/search)
-
-* [MongoDB]()
 
 * [Mongoose](https://mongoosejs.com)
