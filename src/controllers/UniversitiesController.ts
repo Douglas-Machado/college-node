@@ -5,22 +5,41 @@ const service = new UniversitiesModel();
 
 class UniversitiesController{
     async listCountries(request: Request, response: Response){
-        if(request.query.country) {
-            const country: string = request.query.country as string
-            const result = await service.listAll(country);
-
-            return response.json(result)
+        let index = Number(request.query.index)
+        let limit = 20
+        if(index === 0 || !index) {
+            index = 0
+        } else {
+            limit = index + 20
         }
-        const result = await service.listAll();
-
-        return response.json(result)
+        try{
+            if(request.query.country) {
+                const country: string = request.query.country as string
+                const result = await service.listAll(country);
+                const resultResponse = result.slice(index, limit)
+    
+                return response.json(resultResponse)
+            }
+            const result = await service.listAll();
+            const resultResponse = result.slice(index, limit)
+            console.log(resultResponse)
+    
+            return response.json(resultResponse)
+        }catch(err){
+            return response.send({error: err.message})
+        }
     }
 
     async getUniversity(request: Request, response: Response){
-        const { id } = request.params
-        const result = await service.findUniversity(id)
-        
-        return response.json(result)
+        try{
+            const { id } = request.params
+            const result = await service.findUniversity(id)
+            
+            return response.json(result)
+        }catch(err){
+            return response.send({error: err.message})
+        }
+
     }
 
     async deleteUniversity(request: Request, response: Response){

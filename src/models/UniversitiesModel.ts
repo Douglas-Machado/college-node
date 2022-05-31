@@ -9,17 +9,22 @@ class UniversitiesModel{
         return(universityList)
       }
       const country = this.parseCountryValue(countryParam)
-      const universityList = await CountryModel.find({country: country})
+      const universityList = await CountryModel.find({country: country}, '_id name country stateProvince')
 
       return universityList
-    }catch(e){
+    }catch(err){
+      throw("Something went wrong")
     }
   }
 
   async findUniversity(id: string){
-    const result = await CountryModel.findById(id)
-
-    return result
+    try{
+      const result = await CountryModel.findById(id)
+  
+      return result
+    }catch{
+      throw new Error("Invalid ID")
+    }
   }
 
   async deleteUniversity(id: string){
@@ -27,8 +32,8 @@ class UniversitiesModel{
       await CountryModel.deleteOne({_id: id})
 
       return({message: "University deleted"}) 
-    }catch(err){
-      throw new Error("fail while deleting from db")
+    }catch{
+      throw new Error("Invalid ID")
     }
   }
 
@@ -37,4 +42,4 @@ class UniversitiesModel{
   }
 }
 
-export { UniversitiesModel, CountryModel }
+export { UniversitiesModel }
