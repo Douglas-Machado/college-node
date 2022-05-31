@@ -36,7 +36,7 @@ class UniversitiesController{
 				
 				return response.json(result)
 		}catch(err){
-				return response.send({error: err.message})
+				return response.status(400).send({error: err.message})
 		}
 	}
 
@@ -48,7 +48,7 @@ class UniversitiesController{
 
 			return response.json(result)
 		}catch(err){
-			return response.send({error: err.message})
+			return response.status(400).send({error: err.message})
 		}
 	}
 
@@ -60,7 +60,7 @@ class UniversitiesController{
 
 				return response.json(result)
 		}catch(err){
-				return response.send({error: err.message})
+				return response.status(400).send({error: err.message})
 		}
 	}
 
@@ -72,7 +72,7 @@ class UniversitiesController{
 
 				return response.json(result)
 		}catch(err){
-				return response.send({error: err.message})
+				return response.status(400).send({error: err.message})
 		}
 	}
 }

@@ -18,17 +18,16 @@ class ApiRequest{
       const result = countriesUrl.map(async (urlParam: any) => {
         const response = await axios.get(urlParam)
         
-        const parsedResponse = Object.entries(response.data)
-        parsedResponse.map((country: any) => {
+        const parsedResponse: any = Object.entries(response.data)
+        for (let i = 0; i < parsedResponse.length; i++){
           UniversityModel.create(
             {
-              ...country[1],
-              alphaTwoCode: country[1].alpha_two_code,
-              stateProvince: country[1]['state-province'],
-              webPages: country[1].web_pages
-            }
-          )
-        })
+            ...parsedResponse[i][1],
+            alphaTwoCode: parsedResponse[i][1].alpha_two_code,
+            stateProvince: parsedResponse[i][1]['state-province'],
+            webPages: parsedResponse[i][1].web_pages
+          })
+        }
       })
       await Promise.all(result)
     }catch(e){
@@ -36,5 +35,7 @@ class ApiRequest{
     }
   }
 }
-
+  
+  
+  
 export { ApiRequest }

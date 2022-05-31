@@ -1,6 +1,6 @@
 import { UniversityModel } from "./collections/country"
 
-interface IUniversityParams {
+interface IUpdateUniversityParams {
   id: string,
   web_pages: Array<string>;
   name: string,
@@ -61,10 +61,11 @@ class UniversitiesModel{
     }
   }
 
-  async update({id, web_pages, name, domains}: IUniversityParams){
+  async update({id, web_pages, name, domains}: IUpdateUniversityParams){
+    if(!id || !web_pages  || !name || !domains) throw new Error("Invalid params")
     try{
-      await UniversityModel.updateOne(
-        {id: id},
+      await UniversityModel.findOneAndUpdate(
+        {_id: id},
         {
           webPages: web_pages,
           name: name,
