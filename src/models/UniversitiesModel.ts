@@ -34,9 +34,27 @@ class UniversitiesModel{
     }
   }
 
+  async create( {alpha_two_code, web_pages, name, country, domains, stateProvince} ){
+    try{
+      const result = await UniversityModel.create(
+        { 
+          alphaTwoCode: alpha_two_code,
+          webPages: web_pages, 
+          name: name, 
+          country: country, 
+          domains: domains, 
+          stateProvince: stateProvince
+        }
+      )
+      return result
+    }catch(err){
+      throw new Error("Something went wrong")
+    }
+  }
+
   async update({id, web_pages, name, domains}: IUniversityParams){
     try{
-      await UniversityModel.updateOne(
+      const a = await UniversityModel.updateOne(
         {id: id},
         {
           webPages: web_pages,
