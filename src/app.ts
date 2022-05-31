@@ -1,7 +1,6 @@
 import dotenv from "dotenv"
 dotenv.config()
 
-import { ApiRequest } from "./api/ApiRequest";
 import express from "express";
 import cors from "cors"
 import { routes } from "./routes";
@@ -11,9 +10,6 @@ const app = express()
 
 mongoose.connect(process.env.CONNECTIONSTRING)
   .then(() => {
-    mongoose.connection.dropCollection('universities')
-    const apiRequest = new ApiRequest()
-    apiRequest.execute()
     console.log('DB working')
     app.emit('ready')
   }).catch(err => {
