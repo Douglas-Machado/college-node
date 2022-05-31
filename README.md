@@ -1,6 +1,7 @@
 # Univeristy CRUD
 
   CRUD node with mongodb to consume the [universities API](http://universities.hipolabs.com/search)
+  deployment in: [Railway](https://college-node-production.up.railway.app/universities)
 
 # Getting started
 
@@ -8,7 +9,11 @@
 
   Run `npm install` to get the packages
 
+  Run `npm run seeds` to get all data from API
+
   Run `npm run dev` to start the application
+
+  Run `npm run build` to build the application
 
   Run `npm run test` to see the coverage or open the index.html in `coverage/lcov-report`
 
