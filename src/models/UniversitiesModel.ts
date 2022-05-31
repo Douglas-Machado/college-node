@@ -7,6 +7,15 @@ interface IUniversityParams {
   domains: Array<String>;
 }
 
+interface INewUniversityParams {
+  alpha_two_code: string;
+  web_pages?: string;
+  name: string;
+  country: string; 
+  domains: string; 
+  stateProvince: string;
+}
+
 class UniversitiesModel{
   async listAll(countryParam = null) {
     try{
@@ -34,7 +43,7 @@ class UniversitiesModel{
     }
   }
 
-  async create( {alpha_two_code, web_pages, name, country, domains, stateProvince} ){
+  async create( {alpha_two_code, web_pages, name, country, domains, stateProvince}: INewUniversityParams ){
     try{
       const result = await UniversityModel.create(
         { 
@@ -47,14 +56,14 @@ class UniversitiesModel{
         }
       )
       return result
-    }catch(err){
+    }catch{
       throw new Error("Something went wrong")
     }
   }
 
   async update({id, web_pages, name, domains}: IUniversityParams){
     try{
-      const a = await UniversityModel.updateOne(
+      await UniversityModel.updateOne(
         {id: id},
         {
           webPages: web_pages,
