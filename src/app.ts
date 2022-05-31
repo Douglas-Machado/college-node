@@ -11,7 +11,7 @@ const app = express()
 
 mongoose.connect(process.env.CONNECTIONSTRING)
   .then(() => {
-    mongoose.connection.dropCollection('countries')
+    mongoose.connection.dropCollection('universities')
     const apiRequest = new ApiRequest()
     apiRequest.execute()
     console.log('DB working')

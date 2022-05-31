@@ -18,6 +18,7 @@ const UniversitySchema = new mongoose.Schema({
 
 async function validations(name: string){
   const nameCount = await mongoose.models.universities.countDocuments({ name })
+  console.log(nameCount)
   return !nameCount
 }
 
