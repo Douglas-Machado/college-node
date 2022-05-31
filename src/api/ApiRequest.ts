@@ -1,4 +1,4 @@
-import { CountryModel } from "../models/collections/country"
+import { UniversityModel } from "../models/collections/country"
 import axios from "axios"
 
 const countriesUrl = [
@@ -20,7 +20,7 @@ class ApiRequest{
         
         const parsedResponse = Object.entries(response.data)
         parsedResponse.map((country: any) => {
-          CountryModel.create(
+          UniversityModel.create(
             {
               ...country[1],
               alphaTwoCode: country[1].alpha_two_code,
