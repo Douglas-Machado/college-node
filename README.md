@@ -7,6 +7,10 @@
 
   Make sure to add your mongo database `CONNECTIONSTRING` at `.env` file
 
+  ```
+  CONNECTIONSTRING=YOURDBCONNECTIONSTRING
+  ```
+
   Run `npm install` to get the packages
 
   Run `npm run seeds` to get all data from API
