@@ -5,7 +5,7 @@
 
 # Getting started
 
-  Make sure to add your mongo database connection string at `.env` file
+  Make sure to add your mongo database `CONNECTIONSTRING` at `.env` file
 
   Run `npm install` to get the packages
 
