@@ -13,4 +13,4 @@ mongoose.connect(process.env.CONNECTIONSTRING)
     }catch(err){
        console.log(err)
     } 
-}).finally(() => setTimeout(() => console.log("data is ready"), 7000))
+}).finally(() => setTimeout(() => console.log("data is ready"), 15000))

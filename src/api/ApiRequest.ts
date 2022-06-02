@@ -1,6 +1,15 @@
 import { UniversityModel } from "../models/collections/country"
 import axios from "axios"
 
+interface IUniversities {
+  alpha_two_code: string;
+  web_pages: Array<string>;
+  name: string;
+  country: string ;
+  domains: Array<string>
+  stateProvince: string
+}
+
 const countriesUrl = [
   "http://universities.hipolabs.com/search?country=argentina", 
   "http://universities.hipolabs.com/search?country=brazil", 
@@ -15,27 +24,24 @@ const countriesUrl = [
 class ApiRequest{
   async execute(){
     try{
-      const result = countriesUrl.map(async (urlParam: any) => {
+      countriesUrl.map(async (urlParam: any) => {
         const response = await axios.get(urlParam)
         
-        const parsedResponse: any = Object.entries(response.data)
+        const parsedResponse: Array<[string, IUniversities]> = Object.entries(response.data)
         for (let i = 0; i < parsedResponse.length; i++){
           UniversityModel.create(
             {
             ...parsedResponse[i][1],
-            alphaTwoCode: parsedResponse[i][1].alpha_two_code,
+            alphaTwoCode: parsedResponse[i][1]. alpha_two_code,
             stateProvince: parsedResponse[i][1]['state-province'],
             webPages: parsedResponse[i][1].web_pages
           })
         }
       })
-      await Promise.all(result)
     }catch(e){
       console.log(e)
     }
   }
 }
-  
-  
   
 export { ApiRequest }
