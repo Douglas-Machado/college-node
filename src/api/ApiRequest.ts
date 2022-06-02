@@ -24,7 +24,7 @@ const countriesUrl = [
 class ApiRequest{
   async execute(){
     try{
-      countriesUrl.map(async (urlParam: any) => {
+      countriesUrl.map(async (urlParam: string) => {
         const response = await axios.get(urlParam)
         
         const parsedResponse: Array<[string, IUniversities]> = Object.entries(response.data)
@@ -32,7 +32,7 @@ class ApiRequest{
           UniversityModel.create(
             {
             ...parsedResponse[i][1],
-            alphaTwoCode: parsedResponse[i][1]. alpha_two_code,
+            alphaTwoCode: parsedResponse[i][1].alpha_two_code,
             stateProvince: parsedResponse[i][1]['state-province'],
             webPages: parsedResponse[i][1].web_pages
           })
