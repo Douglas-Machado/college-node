@@ -17,7 +17,7 @@ interface INewUniversityParams {
 }
 
 class UniversitiesModel{
-  async listAll(countryParam = null) {
+  async listAll(countryParam?: string) {
     try{
       if(!countryParam){
         const universityList = await UniversityModel.find({}, '_id name country stateProvince')
